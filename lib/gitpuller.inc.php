@@ -11,6 +11,11 @@ class GitPuller
             $this->config=$config;
         }
         $this->cfg=parse_ini_file($this->config, TRUE);
+        $this->log = fopen(dirname(__FILE__)."/../logs/info.log", "a");
+    }
+
+    function __destruct(){
+        fclose($this->log);
     }
 
     // method declaration
@@ -77,6 +82,9 @@ class GitPuller
         $push = json_decode($post);
         $head = explode("/", $push->ref);
         $owner = $push->repository->owner->name;
+        fwrite($this->log, "#####################################\n");
+        fwrite($this->log, $post);
+        fwrite($this->log, "#####################################\n");
         foreach($this->cfg as $branch=>$bspec){
             //echo "Testing against $branch<br/>\n";
             if ($this->_branch_user_match($push, $bspec) && 

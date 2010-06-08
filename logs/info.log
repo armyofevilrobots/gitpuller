@@ -1,0 +1,43 @@
+#####################################
+{
+  "after": "91a0b2d234db2743ae5ee101047bde2f7e09e817", 
+  "before": "1bbe77836d8b82fe81de2affbaf63322472c50e3", 
+  "commits": [
+    {
+      "added": [], 
+      "author": {
+        "email": "derek@armyofevilrobots.com", 
+        "name": "Derek Anderson"
+      }, 
+      "id": "91a0b2d234db2743ae5ee101047bde2f7e09e817", 
+      "message": "Foo change", 
+      "modified": [
+        "README", 
+        "index.php"
+      ], 
+      "removed": [], 
+      "timestamp": "2010-06-08T11:38:24-07:00", 
+      "url": "http:\/\/github.com\/rantenki\/gitpuller\/commit\/91a0b2d234db2743ae5ee101047bde2f7e09e817"
+    }
+  ], 
+  "ref": "refs\/heads\/master", 
+  "repository": {
+    "description": "tool to update a remote server over ssh when a github hook is run", 
+    "fork": false, 
+    "forks": 0, 
+    "has_downloads": true, 
+    "has_issues": true, 
+    "has_wiki": true, 
+    "homepage": "http:\/\/brwr.ca\/", 
+    "name": "gitpuller", 
+    "open_issues": 0, 
+    "owner": {
+      "email": "derek@armyofevilrobots.com", 
+      "name": "rantenki"
+    }, 
+    "private": false, 
+    "url": "http:\/\/github.com\/rantenki\/gitpuller", 
+    "watchers": 1
+  }
+}
+#####################################
