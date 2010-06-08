@@ -22,9 +22,6 @@ class GitPuller
     private function _branch_user_match($push, $bspec){
         if ($push->repository->owner->name != $bspec['owner'] || 
             $push->repository->name != $bspec['project']){
-                //Wrong project or spec. Fail
-                //echo "No match on repo/name", $push->repository->owner->name, " ", $push->repository->name."<br/>\n";
-                //echo "Expected repo/name", $bspec['owner'], " ", $bspec['project']."<br/>\n";
                 return FALSE;
             }
         //Next check branch
@@ -60,17 +57,15 @@ class GitPuller
 
         if ($host="@"){
             $result=0;
-            //echo "Running locally<br/>\n";
             chdir($path);
-            //echo "Running $cmd in $path <br/>\n";
             $out = system($cmd." 2>&1", $result);
-            //echo "$result was result.\n";
             if($result!=0){
                 error_log("Command failed with:\n$out\n");
                 return FALSE;
             }
             return TRUE;
         }else{
+            echo "We are going to do a remote pull\n";
             //echo "Remote repos are not yet implemented...";
             throw new Exception("Remote repos are not yet implemented.");
         }
