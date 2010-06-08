@@ -1,40 +1,41 @@
 {
-  "after": "2eb886208f6686d6664197e488a55c1b5a94246d", 
-  "before": "4541a5f211cfdecc3282fb7dd7fd58ec14b98edb", 
+  "after": "91a0b2d234db2743ae5ee101047bde2f7e09e817", 
+  "before": "1bbe77836d8b82fe81de2affbaf63322472c50e3", 
   "commits": [
     {
-      "added": [
-        "INSTALL"
-      ], 
+      "added": [], 
       "author": {
         "email": "derek@armyofevilrobots.com", 
         "name": "Derek Anderson"
       }, 
-      "id": "2eb886208f6686d6664197e488a55c1b5a94246d", 
-      "message": "Now we commit a test doc", 
-      "modified": [], 
+      "id": "91a0b2d234db2743ae5ee101047bde2f7e09e817", 
+      "message": "Foo change", 
+      "modified": [
+        "README", 
+        "index.php"
+      ], 
       "removed": [], 
-      "timestamp": "2010-06-08T10:31:50-07:00", 
-      "url": "https:\/\/github.com\/rantenki\/pb_udp_stats\/commit\/2eb886208f6686d6664197e488a55c1b5a94246d"
+      "timestamp": "2010-06-08T11:38:24-07:00", 
+      "url": "http:\/\/github.com\/rantenki\/gitpuller\/commit\/91a0b2d234db2743ae5ee101047bde2f7e09e817"
     }
   ], 
   "ref": "refs\/heads\/master", 
   "repository": {
-    "description": "python stat ", 
-    "fork": true, 
+    "description": "tool to update a remote server over ssh when a github hook is run", 
+    "fork": false, 
     "forks": 0, 
     "has_downloads": true, 
-    "has_issues": false, 
+    "has_issues": true, 
     "has_wiki": true, 
-    "homepage": "", 
-    "name": "pb_udp_stats", 
+    "homepage": "http:\/\/brwr.ca\/", 
+    "name": "gitpuller", 
     "open_issues": 0, 
     "owner": {
       "email": "derek@armyofevilrobots.com", 
       "name": "rantenki"
     }, 
-    "private": true, 
-    "url": "https:\/\/github.com\/rantenki\/pb_udp_stats", 
-    "watchers": 2
+    "private": false, 
+    "url": "http:\/\/github.com\/rantenki\/gitpuller", 
+    "watchers": 1
   }
 }
