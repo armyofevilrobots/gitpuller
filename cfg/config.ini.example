@@ -1,0 +1,12 @@
+[dereksbranch]
+owner=rantenki
+project=gitpuller
+branch = master
+repository=origin
+target = @:/tmp/gitpuller
+ruser = gitpuller
+pkey = /home/enki/gitpuller.id_rsa
+huser = "" 
+hpass = ""
+
+
