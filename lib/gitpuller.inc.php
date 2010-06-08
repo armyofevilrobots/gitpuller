@@ -56,6 +56,7 @@ class GitPuller
 
         $host = $_h[0];
         $path = $_h[1];
+        fwrite($this->log, "Pulling at $host:$path\n");
         $repo=$bspec['repo']?$bspec['repo']:'origin';
         $git=$bspec['git']?$bspec['git']:'/usr/bin/git';
         $cmd = $git." pull ".$repo." ".$bspec['branch'];
@@ -63,9 +64,10 @@ class GitPuller
         if ($host="@"){
             $result=0;
             chdir($path);
+            fwrite($this->log, "Cmd: $cmd \n");
             $out = system($cmd." 2>&1", $result);
             if($result!=0){
-                error_log("Command failed with:\n$out\n");
+                fwrite($this->log, "Command failed with:\n$out\n");
                 return FALSE;
             }
             return TRUE;
@@ -89,6 +91,8 @@ class GitPuller
             //echo "Testing against $branch<br/>\n";
             if ($this->_branch_user_match($push, $bspec) && 
                 $this->_branch_verify_auth($authname, $authpwd, $bspec)){
+                    fwrite($this->log, "Starting update...\n");
+
                     return $this->run($bspec);
             }else{
                 return FALSE;
