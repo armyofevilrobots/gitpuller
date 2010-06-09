@@ -25,14 +25,20 @@ class GitPuller
 
 
     private function _branch_user_match($push, $bspec){
-        if ($push->repository->owner->name != $bspec['owner'] || 
-            $push->repository->name != $bspec['project']){
+        $owner=$push->repository->owner->name;
+        $project=$push->repository->name;
+        if ($owner != $bspec['owner'] || 
+            $project != $bspec['project']){
+                fwrite($this->log, "a: $owner|$project b: $bspec[owner]|$bspec[project]\n");
                 return FALSE;
             }
         //Next check branch
         $_head = explode("/", $push->ref);
         $head = $_head[count($_head)-1];
-        if($head != $bspec['branch']) return FALSE;//wrong branch
+        if($head != $bspec['branch']){
+            fwrite($this->log, "Mismatch branch $head vs. $bspec[branch]\n");
+            return FALSE;//wrong branch
+        }
         
         //WIN!
         return TRUE;
@@ -82,12 +88,18 @@ class GitPuller
         //This will receive the POST data and then generate
         //the actions required to push upstream.
         $push = json_decode($post);
+        if (!$push){
+            fwrite($this->log, "Failed to decode json.");
+            throw new Exception("Failed to decode json data.");
+        }
         $head = explode("/", $push->ref);
         $owner = $push->repository->owner->name;
+        var_dump($push);
         fwrite($this->log, "#####################################\n");
         fwrite($this->log, $post);
         fwrite($this->log, "#####################################\n");
         foreach($this->cfg as $branch=>$bspec){
+            fwrite($this->log, "Checking against $branch\n");
             //echo "Testing against $branch<br/>\n";
             if ($this->_branch_user_match($push, $bspec) && 
                 $this->_branch_verify_auth($authname, $authpwd, $bspec)){
