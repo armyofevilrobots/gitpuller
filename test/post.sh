@@ -1,2 +1,2 @@
 #!/bin/bash
-curl -H -X POST --raw --data-binary @../data/test.post http://localhost/gitphp/
+curl -H -X POST --data-binary @../data/test.post http://localhost/gitphp/

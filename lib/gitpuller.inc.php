@@ -89,7 +89,7 @@ class GitPuller
         //the actions required to push upstream.
         $push = json_decode($post);
         if (!$push){
-            fwrite($this->log, "Failed to decode json.");
+            fwrite($this->log, "Failed to decode json from $post\n");
             throw new Exception("Failed to decode json data.");
         }
         $head = explode("/", $push->ref);
