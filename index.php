@@ -2,5 +2,9 @@
 require_once('lib/gitpuller.inc.php');
 $G= new GitPuller();
 $G->dumpcfg();
-$G->process($_POST['payload']);
+$payload = $_POST['payload'];
+if(get_magic_quotes_gpc()){ 
+    $payload=stripslashes($payload); 
+}
+$G->process($payload);
 ?>
