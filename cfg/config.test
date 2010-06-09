@@ -1,0 +1,12 @@
+[testbranch]
+owner=foo
+project=bar
+branch = baz
+repository=origin
+target = @:/tmp/gitpuller
+ruser = gitpuller
+pkey = /dev/null
+huser = "" 
+hpass = ""
+
+

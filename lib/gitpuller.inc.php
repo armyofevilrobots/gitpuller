@@ -4,14 +4,19 @@ class GitPuller
     // property declaration
     //public $var = 'a default value';
     //
-    function __construct($config=FALSE){
+    function __construct($config=FALSE, $log=FALSE){
         if (!$config){
             $this->config=dirname(__FILE__)."/../cfg/config.ini";
         }else{
             $this->config=$config;
         }
         $this->cfg=parse_ini_file($this->config, TRUE);
-        $this->log = fopen(dirname(__FILE__)."/../logs/info.log", "a");
+        if(!$log){
+            $this->log = fopen(dirname(__FILE__)."/../logs/info.log", "a");
+        }else{
+            $this->log = fopen($log);
+        }
+        fwrite($this->log, "Started log at ".date(DATE_ISO8601)."\n");
     }
 
     function __destruct(){
@@ -24,7 +29,7 @@ class GitPuller
     }
 
 
-    private function _branch_user_match($push, $bspec){
+    protected function _branch_user_match($push, $bspec){
         $owner=$push->repository->owner->name;
         $project=$push->repository->name;
         if ($owner != $bspec['owner'] || 
@@ -44,7 +49,7 @@ class GitPuller
         return TRUE;
     }
 
-    private function _branch_verify_auth($u, $p, $bspec){
+    protected function _branch_verify_auth($u, $p, $bspec){
         if( ($bspec['huser'] == "" || $u == $bspec['huser']) && 
             ($bspec['hpass'] == "" || $p == $bspec['hpass'])){
                 //echo "Auth OK";
@@ -53,7 +58,7 @@ class GitPuller
         return FALSE;
     }
 
-    private function run($bspec){
+    protected function run($bspec){
         ///This actually runs the repo push/pull
         $_h = explode(":", $bspec['target']);
         if(count($_h)!=2){
@@ -95,16 +100,15 @@ class GitPuller
         $head = explode("/", $push->ref);
         $owner = $push->repository->owner->name;
         var_dump($push);
-        fwrite($this->log, "#####################################\n");
-        fwrite($this->log, $post);
-        fwrite($this->log, "#####################################\n");
+        //fwrite($this->log, "################################\n");
+        //fwrite($this->log, $post);
+        //fwrite($this->log, "################################\n");
         foreach($this->cfg as $branch=>$bspec){
             fwrite($this->log, "Checking against $branch\n");
             //echo "Testing against $branch<br/>\n";
             if ($this->_branch_user_match($push, $bspec) && 
                 $this->_branch_verify_auth($authname, $authpwd, $bspec)){
                     fwrite($this->log, "Starting update...\n");
-
                     return $this->run($bspec);
             }else{
                 return FALSE;
